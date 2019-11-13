@@ -1,0 +1,8 @@
+# dist
+dist
+
+# dependencies
+node_modules
+
+# intellij
+.idea
