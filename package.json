@@ -4,11 +4,26 @@
   "description": "tecobrary node server typescript version",
   "main": "index.js",
   "scripts": {
-    "serve": "nodemon --exec ts-node src/app.ts"
+    "serve": "nodemon --exec ts-node src/app.ts",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "\\.test\\.ts$",
+    "moduleFileExtensions": [
+      "ts", "js"
+    ],
+    "globals": {
+      "ts-jest": {
+        "enableTsDiagnostics": true
+      }
+    }
+  },
   "dependencies": {
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
