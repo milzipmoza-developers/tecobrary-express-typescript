@@ -1,11 +1,11 @@
 const express = require('express');
 
-const index = express();
+const app = express();
 
-index.get('/', (req: any, res: any) => {
+app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-index.listen(8080, () => {
+app.listen(8080, () => {
     console.log(`app listening on 8080 port`)
 });
