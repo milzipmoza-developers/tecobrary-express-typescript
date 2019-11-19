@@ -4,34 +4,53 @@ import {AutoIncrement, Column, DataType, Default, IsUrl, Length, Model, PrimaryK
     timestamps: true,
     charset: 'utf8',
     collate: 'utf8_general_ci',
-    tableName: 'User'
+    tableName: 'Users'
 })
 export class User extends Model<User> {
 
     @PrimaryKey
     @AutoIncrement
-    @Column({primaryKey: true, allowNull: false})
-    public id?: number;
+    @Column({
+        primaryKey: true,
+        allowNull: false
+    })
+    public id: number;
 
     @Length({max: 100})
-    @Column({unique: true, allowNull: false})
-    public github_id: string;
+    @Column({
+        type: DataType.STRING(100),
+        unique: true,
+        allowNull: false
+    })
+    public githubId: string;
 
     @Length({max: 100})
-    @Column({allowNull: false})
+    @Column({
+        type: DataType.STRING(100),
+        allowNull: false
+    })
     public email: string;
 
     @Length({max: 100})
-    @Column({allowNull: true})
-    public name?: string;ø
+    @Column({
+        type: DataType.STRING(100),
+        allowNull: true
+    })
+    public name?: string;
 
     @IsUrl
     @Length({max: 255})
-    @Column({allowNull: false})
-    public avatar_url: string;
+    @Column({
+        type: DataType.STRING(255),
+        allowNull: false
+    })
+    public avatarUrl: string;
 
     @Default('none')
-    @Column(DataType.ENUM('none', 'user', 'manager', 'god'))
-    public authorization: any;
+    @Column({
+        type: DataType.ENUM('none', 'user', 'manager', 'god'),
+        allowNull: false
+    })
+    public authorization: 'none' | 'user' | 'manager' | 'god';
 }
 
