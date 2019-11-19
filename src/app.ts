@@ -1,11 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const morgan = require('morgan')
 
-const app = express();
+export const app = express();
+
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Hello World');
-});
-
-app.listen(8080, () => {
-    console.log(`app listening on 8080 port`)
 });
