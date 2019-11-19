@@ -1,4 +1,4 @@
-import {Column, Model, Table} from "sequelize-typescript";
+import {AutoIncrement, Column, Model, PrimaryKey, Table} from "sequelize-typescript";
 import {DataTypes} from "sequelize";
 
 @Table({
@@ -7,6 +7,14 @@ import {DataTypes} from "sequelize";
     tableName: 'LibraryBooks'
 })
 export class LibraryBook extends Model<LibraryBook>{
+
+    @PrimaryKey
+    @AutoIncrement
+    @Column({
+        primaryKey: true,
+        allowNull: false
+    })
+    public id: number;
 
     @Column({
         type: DataTypes.STRING(255),

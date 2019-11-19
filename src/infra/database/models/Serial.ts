@@ -1,4 +1,4 @@
-import {Column, CreatedAt, Model, Table, UpdatedAt} from "sequelize-typescript";
+import {AutoIncrement, Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt} from "sequelize-typescript";
 import {DataTypes} from "sequelize";
 
 @Table({
@@ -8,6 +8,13 @@ import {DataTypes} from "sequelize";
     tableName: 'Serials'
 })
 export class Serial extends Model<Serial> {
+
+    @PrimaryKey
+    @Column({
+        primaryKey: true,
+        allowNull: false
+    })
+    public id: number;
 
     @Column({
         type: DataTypes.BOOLEAN,

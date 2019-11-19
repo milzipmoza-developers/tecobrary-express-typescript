@@ -1,4 +1,4 @@
-import {Column, IsUrl, Model, Table} from "sequelize-typescript";
+import {AutoIncrement, Column, IsUrl, Model, PrimaryKey, Table} from "sequelize-typescript";
 import {DataTypes} from "sequelize";
 
 @Table({
@@ -9,6 +9,14 @@ import {DataTypes} from "sequelize";
     tableName: 'WishBooks'
 })
 export class WishBook extends Model<WishBook> {
+
+    @PrimaryKey
+    @AutoIncrement
+    @Column({
+        primaryKey: true,
+        allowNull: false
+    })
+    public id: number;
 
     @IsUrl
     @Column({

@@ -1,4 +1,4 @@
-import {Column, Model, Table} from "sequelize-typescript";
+import {Column, Model, PrimaryKey, Table} from "sequelize-typescript";
 import {DataTypes} from "sequelize";
 
 @Table({
@@ -10,6 +10,7 @@ import {DataTypes} from "sequelize";
 })
 export class RentHistory extends Model<RentHistory> {
 
+    @PrimaryKey
     @Column({
         type: DataTypes.INTEGER,
         allowNull: false,
