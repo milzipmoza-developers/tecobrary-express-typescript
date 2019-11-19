@@ -1,4 +1,5 @@
 import {AutoIncrement, Column, DataType, Default, IsUrl, Length, Model, PrimaryKey, Table} from 'sequelize-typescript';
+import {Authorization} from "../../../common/Authorization";
 
 @Table({
     timestamps: true,
@@ -46,11 +47,11 @@ export class User extends Model<User> {
     })
     public avatarUrl: string;
 
-    @Default('none')
+    @Default(Authorization.NONE)
     @Column({
-        type: DataType.ENUM('none', 'user', 'manager', 'god'),
+        type: DataType.ENUM(Authorization.NONE, Authorization.USER, Authorization.MANAGER, Authorization.KING),
         allowNull: false
     })
-    public authorization: 'none' | 'user' | 'manager' | 'god';
+    public authorization: 'NONE' | 'USER' | 'MANAGER' | 'GOD';
 }
 
