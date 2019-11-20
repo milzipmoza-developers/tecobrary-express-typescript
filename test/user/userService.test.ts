@@ -1,6 +1,7 @@
-require('mysql2/node_modules/iconv-lite').encodingExists('foo');
-
+import {GithubUser} from "../../src/user/githubUser";
 import {UserService} from "../../src/user/userService";
+
+require('mysql2/node_modules/iconv-lite').encodingExists('foo');
 
 describe('UserService 테스트', () => {
 
@@ -8,14 +9,14 @@ describe('UserService 테스트', () => {
         const savedUser = await UserService.findById(1);
         await expect(savedUser['id']).toBe(1);
         await expect(savedUser['githubId']).toBe("1");
-        await expect(savedUser['email']).toBe('e@e.com');
-        await expect(savedUser['name']).toBe('test1');
+        await expect(savedUser['email']).toBe('a@a.com');
+        await expect(savedUser['name']).toBe('a');
         await expect(savedUser['avatarUrl']).toBe('https://avatar.url');
     });
 
     test('getTotalNumber 가 성공적으로 전체 갯수를 반환한다.', async () => {
         const total = await UserService.getTotalNumber();
-        await expect(total).toBe(11);
+        await expect(total).toBe(12);
     });
 
     test('getPageableUsers 메서드가 10개씩 뽑아온다.', async () => {
@@ -27,4 +28,21 @@ describe('UserService 테스트', () => {
         const list = await UserService.getPageableUsers(1, 6);
         await expect(list.length).toBe(6);
     });
+
+    test('createUser 가 성공적으로 유저를 생성한다.', async () => {
+        const githubUser = new GithubUser(
+            '123123',
+            'new@user.com',
+            'user',
+            'https://avatar.url'
+        );
+        const createdUser = await UserService.createUser(githubUser);
+        await expect(createdUser['id']).not.toBeNull();
+        await expect(createdUser['githubId']).toBe(123123);
+        await expect(createdUser['email']).toBe('new@user.com');
+        await expect(createdUser['name']).toBe('user');
+        await expect(createdUser['avatarUrl']).toBe('https://avatar.url');
+
+        await UserService.deleteUser(createdUser['id']);
+    })
 });
