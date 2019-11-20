@@ -1,5 +1,6 @@
 import {sequelize} from "../infra/database/sequelize";
 import {User} from "../infra/database/models/User";
+import {GithubUser} from "./githubUser";
 
 const userRepository = sequelize.getRepository(User);
 
@@ -7,6 +8,21 @@ const findById = async (id: number) => {
     const savedUser = await userRepository.findOne({where: {id}});
     return savedUser.get({plain: true});
 };
+
+const createUser = async (user: GithubUser) => {
+    const savedUser = await userRepository.create({
+        githubId: user.githubId,
+        email: user.email,
+        name: user.name,
+        avatarUrl: user.avatarUrl
+    });
+    return savedUser.get({plain: true});
+};
+
+const deleteUser = async (id: number) => {
+    const deletedUser = await userRepository.destroy({where: {id}});
+    return deletedUser;
+}
 
 const getTotalNumber = async () => {
     const users = await userRepository.findAll({attributes: ['id']});
@@ -33,6 +49,8 @@ const _getProperOffset = (page: number, numbers: number) => {
 
 const UserService = {
     findById,
+    createUser,
+    deleteUser,
     getTotalNumber,
     getPageableUsers,
 };
