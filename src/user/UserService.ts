@@ -1,6 +1,8 @@
 import {sequelize} from "../infra/database/sequelize";
 import {User} from "../infra/database/models/User";
 import {GithubUser} from "./githubUser";
+import {UpdateUserAuthorizationError} from "./error/UpdateUserAuthorizationError";
+import {UpdateUserNameError} from "./error/UpdateUserNameError";
 
 const userRepository = sequelize.getRepository(User);
 
@@ -19,10 +21,40 @@ const createUser = async (user: GithubUser) => {
     return savedUser.get({plain: true});
 };
 
-const deleteUser = async (id: number) => {
+const deleteUserById = async (id: number) => {
     const deletedUser = await userRepository.destroy({where: {id}});
     return deletedUser;
-}
+};
+
+const updateUserAuthorization = async (id: number, authorization: string) => {
+    const updateResult = await userRepository.update(
+        {
+            authorization: authorization
+        },
+        {
+            where: {id: id}
+        });
+    if (updateResult[0] === 1) {
+        return;
+    } else {
+        throw new UpdateUserAuthorizationError();
+    }
+};
+
+const updateUserName = async (id: number, name: string) => {
+    const updateResult = await userRepository.update(
+        {
+            name
+        },
+        {
+            where: {id}
+        });
+    if (updateResult[0] === 1) {
+        return;
+    } else {
+        throw new UpdateUserNameError();
+    }
+};
 
 const getTotalNumber = async () => {
     const users = await userRepository.findAll({attributes: ['id']});
@@ -50,7 +82,9 @@ const _getProperOffset = (page: number, numbers: number) => {
 const UserService = {
     findById,
     createUser,
-    deleteUser,
+    deleteUserById,
+    updateUserAuthorization,
+    updateUserName,
     getTotalNumber,
     getPageableUsers,
 };
