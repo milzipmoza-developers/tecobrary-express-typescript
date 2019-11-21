@@ -1,5 +1,5 @@
 import {GithubUser} from "../../src/user/githubUser";
-import {UserService} from "../../src/user/userService";
+import {UserService} from "../../src/user/UserService";
 
 require('mysql2/node_modules/iconv-lite').encodingExists('foo');
 
@@ -43,6 +43,34 @@ describe('UserService 테스트', () => {
         await expect(createdUser['name']).toBe('user');
         await expect(createdUser['avatarUrl']).toBe('https://avatar.url');
 
-        await UserService.deleteUser(createdUser['id']);
-    })
+        await UserService.deleteUserById(createdUser['id']);
+    });
+
+    test('updateAuthorization 이 정상적으로 권한을 업데이트 한다.', async () => {
+        const testTargetUserId = 1;
+        // check before update
+        const beforeUpdated = await UserService.findById(testTargetUserId);
+        await expect(beforeUpdated['authorization']).toBe('NONE');
+        // update userAuthorization NONE to KING
+        await UserService.updateUserAuthorization(testTargetUserId, 'KING');
+        // check after update
+        const afterUpdate = await UserService.findById(testTargetUserId);
+        await expect(afterUpdate['authorization']).toBe('KING');
+        // rollback
+        await UserService.updateUserAuthorization(testTargetUserId, beforeUpdated['authorization']);
+    });
+
+    test('updateUserName 이 정상적으로 이름을 업데이트 한다.', async () => {
+        const testTargetUserId = 1;
+        // check before update
+        const beforeUpdated = await UserService.findById(testTargetUserId);
+        await expect(beforeUpdated['name']).toBe('a');
+        // update user name a to newName
+        await UserService.updateUserName(testTargetUserId, 'newName');
+        // check after update
+        const afterUpdate = await UserService.findById(testTargetUserId);
+        await expect(afterUpdate['name']).toBe('newName');
+        // rollback
+        await UserService.updateUserName(testTargetUserId, beforeUpdated['name']);
+    });
 });
