@@ -1,5 +1,6 @@
 import {GithubUser} from "../../src/user/GithubUser";
 import * as UserService from"../../src/user/service/UserService";
+import {rollbackUserAuthorization, rollbackUserName} from "./UserRepositoryUtils";
 
 require('mysql2/node_modules/iconv-lite').encodingExists('foo');
 
@@ -57,7 +58,7 @@ describe('UserService 테스트', () => {
         const afterUpdate = await UserService.findById(testTargetUserId);
         await expect(afterUpdate['authorization']).toBe('KING');
         // rollback
-        await UserService.updateUserAuthorization(testTargetUserId, beforeUpdated['authorization']);
+        await rollbackUserAuthorization(testTargetUserId, beforeUpdated['authorization']);
     });
 
     test('updateUserName 이 정상적으로 이름을 업데이트 한다.', async () => {
@@ -71,6 +72,6 @@ describe('UserService 테스트', () => {
         const afterUpdate = await UserService.findById(testTargetUserId);
         await expect(afterUpdate['name']).toBe('newName');
         // rollback
-        await UserService.updateUserName(testTargetUserId, beforeUpdated['name']);
+        await rollbackUserName(testTargetUserId, beforeUpdated['name']);
     });
 });
