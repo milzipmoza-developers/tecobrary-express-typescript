@@ -1,12 +1,15 @@
 import {sequelize} from "../../infra/database/sequelize";
 import {User} from "../../infra/database/models/User";
 import {GithubUser} from "../GithubUser";
-import {UpdateUserAuthorizationError, UpdateUserNameError} from "../error/";
+import {NotFoundUserError, UpdateUserAuthorizationError, UpdateUserNameError} from "../error/";
 
 const userRepository = sequelize.getRepository(User);
 
 export const findById = async (id: number) => {
     const savedUser = await userRepository.findOne({where: {id}});
+    if (savedUser === null) {
+        throw new NotFoundUserError();
+    }
     return savedUser.get({plain: true});
 };
 
