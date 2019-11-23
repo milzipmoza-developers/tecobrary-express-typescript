@@ -2,7 +2,7 @@ const {Router} = require('express');
 
 const UserController = require('./UserController');
 
-const userRouterFactory = () => Router()
+export const userRouterFactory = () => Router()
     .get('/users/all',
         UserController.totalUsers)
 
@@ -17,7 +17,3 @@ const userRouterFactory = () => Router()
 
     .patch('/users',
         UserController.updateName);
-
-module.exports = {
-    userRouterFactory
-};
