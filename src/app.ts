@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 
-import {userRouterFactory} from "./user/router/userRouterFactory";
+import {userRouterFactory} from './user/router/userRouterFactory';
+import {naverApiRouterFactory} from './common/router/naverApiRouterFactory';
 
 export const app = express();
 
@@ -11,8 +12,10 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use(userRouterFactory());
-
 app.get('/', (req, res) => {
     res.send('Welcome Tecobrary Api v1');
 });
+
+app.use(userRouterFactory());
+
+app.use(naverApiRouterFactory());
