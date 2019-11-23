@@ -1,6 +1,6 @@
-const {Router} = require('express');
+import {Router} from 'express';
 
-const UserController = require('./UserController');
+import * as UserController from './ui/UserController';
 
 export const userRouterFactory = () => Router()
     .get('/users/all',

@@ -1,6 +1,6 @@
-const UserService = require('../service/UserService');
+import * as UserService from '../service/UserService';
 
-const totalUsers = async (req, res) => {
+export const totalUsers = async (req, res) => {
     try {
         const totalCount = await UserService.getTotalNumber();
         res.status(200).send({
@@ -13,25 +13,23 @@ const totalUsers = async (req, res) => {
     }
 };
 
-const pageUsers = async (req, res) => {
+export const pageUsers = async (req, res) => {
     try {
-        const {page, number} = req.query;
-        const offset = parseInt(page);
-        const limit = parseInt(number);
-        const userList = await UserService.getPageableUsers(offset, limit);
+        const page = parseInt(req.query.page);
+        const number = parseInt(req.query.number);
+        const userList = await UserService.getPageableUsers(page, number);
         res.status(200).send(userList)
     } catch (error) {
-        console.log(error);
         res.status(404).send({
             message: 'error occurred'
         });
     }
 };
 
-const findUserById =  async (req, res) => {
+export const findUserById =  async (req, res) => {
     try {
-        const {id} = req.params;
-        const user = await UserService.findById(parseInt(id));
+        const id = parseInt(req.params.id);
+        const user = await UserService.findById(id);
         res.status(200).send(user)
     } catch (error) {
         res.status(404).send({
@@ -40,9 +38,10 @@ const findUserById =  async (req, res) => {
     }
 };
 
-const updateAuthorization = async (req, res) => {
+export const updateAuthorization = async (req, res) => {
     try {
-        const {id, newAuthorization} = req.body;
+        const id = parseInt(req.body.id);
+        const newAuthorization = req.body.newAuthorization;
         await UserService.updateUserAuthorization(id, newAuthorization);
         const updatedUser = await UserService.findById(id);
         res.status(200).send(updatedUser);
@@ -53,9 +52,10 @@ const updateAuthorization = async (req, res) => {
     }
 };
 
-const updateName = async (req, res) => {
+export const updateName = async (req, res) => {
     try {
-        const {id, newName} = req.body;
+        const id = parseInt(req.body.id);
+        const newName = req.body.newName;
         await UserService.updateUserName(id, newName);
         const updatedUser = await UserService.findById(id);
         res.status(200).send(updatedUser);
@@ -64,12 +64,4 @@ const updateName = async (req, res) => {
             message: 'error occurred'
         });
     }
-};
-
-module.exports = {
-    totalUsers,
-    pageUsers,
-    findUserById,
-    updateAuthorization,
-    updateName
 };

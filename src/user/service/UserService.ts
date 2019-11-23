@@ -1,17 +1,16 @@
 import {sequelize} from "../../infra/database/sequelize";
 import {User} from "../../infra/database/models/User";
 import {GithubUser} from "../GithubUser";
-import {UpdateUserAuthorizationError} from "../error/UpdateUserAuthorizationError";
-import {UpdateUserNameError} from "../error/UpdateUserNameError";
+import {UpdateUserAuthorizationError, UpdateUserNameError} from "../error/";
 
 const userRepository = sequelize.getRepository(User);
 
-const findById = async (id: number) => {
+export const findById = async (id: number) => {
     const savedUser = await userRepository.findOne({where: {id}});
     return savedUser.get({plain: true});
 };
 
-const createUser = async (user: GithubUser) => {
+export const createUser = async (user: GithubUser) => {
     const savedUser = await userRepository.create({
         githubId: user.githubId,
         email: user.email,
@@ -21,12 +20,12 @@ const createUser = async (user: GithubUser) => {
     return savedUser.get({plain: true});
 };
 
-const deleteUserById = async (id: number) => {
+export const deleteUserById = async (id: number) => {
     const deletedUser = await userRepository.destroy({where: {id}});
     return deletedUser;
 };
 
-const updateUserAuthorization = async (id: number, authorization: string) => {
+export const updateUserAuthorization = async (id: number, authorization: string) => {
     const updateResult = await userRepository.update(
         {
             authorization: authorization
@@ -41,7 +40,7 @@ const updateUserAuthorization = async (id: number, authorization: string) => {
     }
 };
 
-const updateUserName = async (id: number, name: string) => {
+export const updateUserName = async (id: number, name: string) => {
     const updateResult = await userRepository.update(
         {
             name
@@ -56,12 +55,12 @@ const updateUserName = async (id: number, name: string) => {
     }
 };
 
-const getTotalNumber = async () => {
+export const getTotalNumber = async () => {
     const users = await userRepository.findAll({attributes: ['id']});
     return users.length;
 };
 
-const getPageableUsers = async (page: number, limit: number) => {
+export const getPageableUsers = async (page: number, limit: number) => {
     const offset = _getProperOffset(page, limit);
     const users = await userRepository.findAll({offset, limit});
     const userList = [];
@@ -77,14 +76,4 @@ const _getProperOffset = (page: number, limit: number) => {
         offset = limit * (page - 1);
     }
     return offset;
-};
-
-module.exports = {
-    findById,
-    createUser,
-    deleteUserById,
-    updateUserAuthorization,
-    updateUserName,
-    getTotalNumber,
-    getPageableUsers,
 };
