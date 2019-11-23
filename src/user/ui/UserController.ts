@@ -1,7 +1,7 @@
 import * as UserService from '../service/UserService';
 import * as ErrorResponse from "../../common/utils/ErrorResponse";
 
-import {parseToNumber} from "../../common/utils/stringParser";
+import {parseToNumber} from "../../common/utils/InputUtils";
 import {CannotParseToNumberError} from "../../common/utils/error";
 import {NotFoundUserError, UpdateUserAuthorizationError, UpdateUserNameError} from "../error";
 import {DatabaseError} from "sequelize";

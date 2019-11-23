@@ -1,7 +1,7 @@
-import {parseToNumber} from "../../../src/common/utils/stringParser";
+import {parseToNumber} from "../../../src/common/utils/InputUtils";
 import {CannotParseToNumberError} from "../../../src/common/utils/error";
 
-describe('stringParser 테스트', () => {
+describe('InputUtils 테스트', () => {
     test('parseToNumber 성공', () => {
         const stringTypeNumber = '1';
         const parsedNumber = parseToNumber(stringTypeNumber);
