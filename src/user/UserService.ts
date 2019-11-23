@@ -61,9 +61,9 @@ const getTotalNumber = async () => {
     return users.length;
 };
 
-const getPageableUsers = async (page: number, numbers: number) => {
-    const offset = _getProperOffset(page, numbers);
-    const users = await userRepository.findAll({offset: offset, limit: numbers});
+const getPageableUsers = async (page: number, limit: number) => {
+    const offset = _getProperOffset(page, limit);
+    const users = await userRepository.findAll({offset, limit});
     const userList = [];
     users.forEach(user => {
         userList.push(user.get({plain: true}))
@@ -71,15 +71,15 @@ const getPageableUsers = async (page: number, numbers: number) => {
     return userList;
 };
 
-const _getProperOffset = (page: number, numbers: number) => {
+const _getProperOffset = (page: number, limit: number) => {
     let offset = 0;
     if (page > 1) {
-        offset = numbers * (page - 1);
+        offset = limit * (page - 1);
     }
     return offset;
 };
 
-const UserService = {
+module.exports = {
     findById,
     createUser,
     deleteUserById,
@@ -87,8 +87,4 @@ const UserService = {
     updateUserName,
     getTotalNumber,
     getPageableUsers,
-};
-
-export {
-    UserService
 };
