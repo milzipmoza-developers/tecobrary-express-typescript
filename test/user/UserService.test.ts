@@ -1,4 +1,4 @@
-import {GithubUser} from "../../src/user/githubUser";
+import {GithubUser} from "../../src/user/GithubUser";
 const UserService = require("../../src/user/UserService");
 
 require('mysql2/node_modules/iconv-lite').encodingExists('foo');

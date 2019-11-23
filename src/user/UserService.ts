@@ -1,6 +1,6 @@
 import {sequelize} from "../infra/database/sequelize";
 import {User} from "../infra/database/models/User";
-import {GithubUser} from "./githubUser";
+import {GithubUser} from "./GithubUser";
 import {UpdateUserAuthorizationError} from "./error/UpdateUserAuthorizationError";
 import {UpdateUserNameError} from "./error/UpdateUserNameError";
 
