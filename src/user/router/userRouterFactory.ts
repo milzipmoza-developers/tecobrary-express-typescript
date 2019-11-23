@@ -1,6 +1,6 @@
 import {Router} from 'express';
 
-import * as UserController from './ui/UserController';
+import * as UserController from '../ui/UserController';
 
 export const userRouterFactory = () => Router()
     .get('/users/all',

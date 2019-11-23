@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 
-import {userRouterFactory} from "./user/userRouterFactory";
+import {userRouterFactory} from "./user/router/userRouterFactory";
 
 export const app = express();
 
