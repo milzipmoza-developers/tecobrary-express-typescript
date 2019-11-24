@@ -1,4 +1,4 @@
-import {GithubUser} from "../../src/user/GithubUser";
+import {GithubUserVo} from "../../src/user/GithubUserVo";
 import * as UserService from"../../src/user/service/UserService";
 import {rollbackUserAuthorization, rollbackUserName} from "./UserRepositoryUtils";
 
@@ -31,7 +31,7 @@ describe('UserService 테스트', () => {
     });
 
     test('createUser 가 성공적으로 유저를 생성한다.', async () => {
-        const githubUser = new GithubUser(
+        const githubUser = new GithubUserVo(
             '123123',
             'new@user.com',
             'user',

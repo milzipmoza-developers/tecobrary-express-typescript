@@ -1,6 +1,6 @@
 import {sequelize} from "../../infra/database/sequelize";
 import {User} from "../../infra/database/models/User";
-import {GithubUser} from "../GithubUser";
+import {GithubUserVo} from "../GithubUserVo";
 import {NotFoundUserError, UpdateUserAuthorizationError, UpdateUserNameError} from "../error/";
 import {calculate} from "../../common/utils/OffsetCalculator";
 
@@ -14,7 +14,7 @@ export const findById = async (id: number) => {
     return savedUser.get({plain: true});
 };
 
-export const createUser = async (user: GithubUser) => {
+export const createUser = async (user: GithubUserVo) => {
     const savedUser = await userRepository.create({
         githubId: user.githubId,
         email: user.email,
