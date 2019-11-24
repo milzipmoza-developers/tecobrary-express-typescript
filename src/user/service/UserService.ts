@@ -66,10 +66,10 @@ export const getTotalNumber = async () => {
 
 export const getPageableUsers = async (page: number, limit: number) => {
     const offset = calculate(page, limit);
-    const users = await userRepository.findAll({offset, limit});
-    const userList = [];
-    users.forEach(user => {
-        userList.push(user.get({plain: true}))
+    const savedUsers = await userRepository.findAll({offset, limit});
+    const users = [];
+    savedUsers.forEach(user => {
+        users.push(user.get({plain: true}));
     });
-    return userList;
+    return users;
 };
