@@ -6,7 +6,7 @@ require('mysql2/node_modules/iconv-lite').encodingExists('foo');
 
 describe('UserService 테스트', () => {
 
-    test('getUser 가 성공적으로 유저를 반환한다.', async () => {
+    test('findById 가 성공적으로 유저를 반환한다.', async () => {
         const savedUser: Object = await UserService.findById(1);
         await expect(savedUser['id']).toBe(1);
         await expect(savedUser['githubId']).toBe("1");
