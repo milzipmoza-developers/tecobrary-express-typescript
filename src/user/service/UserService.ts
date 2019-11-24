@@ -2,6 +2,7 @@ import {sequelize} from "../../infra/database/sequelize";
 import {User} from "../../infra/database/models/User";
 import {GithubUser} from "../GithubUser";
 import {NotFoundUserError, UpdateUserAuthorizationError, UpdateUserNameError} from "../error/";
+import {calculate} from "../../common/utils/OffsetCalculator";
 
 const userRepository = sequelize.getRepository(User);
 
@@ -64,19 +65,11 @@ export const getTotalNumber = async () => {
 };
 
 export const getPageableUsers = async (page: number, limit: number) => {
-    const offset = _getProperOffset(page, limit);
+    const offset = calculate(page, limit);
     const users = await userRepository.findAll({offset, limit});
     const userList = [];
     users.forEach(user => {
         userList.push(user.get({plain: true}))
     });
     return userList;
-};
-
-const _getProperOffset = (page: number, limit: number) => {
-    let offset = 0;
-    if (page > 1) {
-        offset = limit * (page - 1);
-    }
-    return offset;
 };
