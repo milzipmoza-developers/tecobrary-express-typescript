@@ -9,7 +9,6 @@ const libraryBookRepository = sequelize.getRepository(LibraryBook);
 
 export const findById = async (id: number) => {
     const savedBook = await libraryBookRepository.findOne({where: {id}})
-    console.log(savedBook);
     if (savedBook === null) {
         throw new NotFoundLibraryBookError();
     }
@@ -48,15 +47,21 @@ export const getPageableBooks = async (page: number, limit: number) => {
     return books;
 };
 
-export const searchBooks = async (title: string) => {
-    const searchResults = await libraryBookRepository.findAll({
+export const searchBooks = async (title: string, page: number, limit: number) => {
+    const offset = calculate(page, limit);
+    const searchedBooks = await libraryBookRepository.findAll({
         attributes: ['id', 'title'],
         where: {
             title: {
                 [Op.like]: "%" + title + "%"
             }
         },
-        limit: 10
+        limit,
+        offset
     });
-    return searchResults;
+    const books = [];
+    searchedBooks.forEach(book => {
+        books.push(book.get({plain: true}));
+    });
+    return books;
 };
