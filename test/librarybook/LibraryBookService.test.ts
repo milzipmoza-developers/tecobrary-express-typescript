@@ -51,7 +51,7 @@ describe('LibraryBookService 테스트', () => {
     });
 
     test('searchBooks 가 정상적으로 검색 결과를 반환한다.', async () => {
-        const searchBooks = await LibraryBookService.searchBooks('객');
+        const searchBooks = await LibraryBookService.searchBooks('객', 1, 10);
         await expect(searchBooks.length).toBe(2);
     });
 });
