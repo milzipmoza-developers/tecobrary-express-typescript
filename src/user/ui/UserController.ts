@@ -1,5 +1,5 @@
 import * as UserService from '../service/UserService';
-import * as ErrorResponse from "../../common/utils/ErrorResponse";
+import * as ResponseFactory from "../../common/utils/ResponseFactory";
 
 import {parseToNumber} from "../../common/utils/InputUtils";
 import {CannotParseToNumberError} from "../../common/utils/error";
@@ -17,7 +17,7 @@ export const totalUsers = async (req, res) => {
             total: totalCount
         });
     } catch (error) {
-        ErrorResponse.send(res, 404, _ERROR_MESSAGE);
+        ResponseFactory.sendError(res, 404, _ERROR_MESSAGE);
     }
 };
 
@@ -29,10 +29,10 @@ export const pageUsers = async (req, res) => {
         res.status(200).send(userList);
     } catch (error) {
         if (error instanceof CannotParseToNumberError) {
-            ErrorResponse.send(res, 400, _BAD_REQUEST_MESSAGE);
+            ResponseFactory.sendError(res, 400, _BAD_REQUEST_MESSAGE);
             return;
         }
-        ErrorResponse.send(res, 404, _ERROR_MESSAGE);
+        ResponseFactory.sendError(res, 404, _ERROR_MESSAGE);
     }
 };
 
@@ -43,10 +43,10 @@ export const findUserById = async (req, res) => {
         res.status(200).send(user);
     } catch (error) {
         if (error instanceof CannotParseToNumberError || NotFoundUserError) {
-            ErrorResponse.send(res, 400, _BAD_REQUEST_MESSAGE);
+            ResponseFactory.sendError(res, 400, _BAD_REQUEST_MESSAGE);
             return;
         }
-        ErrorResponse.send(res, 404, _ERROR_MESSAGE);
+        ResponseFactory.sendError(res, 404, _ERROR_MESSAGE);
     }
 };
 
@@ -59,10 +59,10 @@ export const updateAuthorization = async (req, res) => {
         res.status(200).send(updatedUser);
     } catch (error) {
         if (error instanceof DatabaseError || UpdateUserAuthorizationError || CannotParseToNumberError) {
-            ErrorResponse.send(res, 400, _BAD_REQUEST_MESSAGE);
+            ResponseFactory.sendError(res, 400, _BAD_REQUEST_MESSAGE);
             return;
         }
-        ErrorResponse.send(res, 404, _ERROR_MESSAGE);
+        ResponseFactory.sendError(res, 404, _ERROR_MESSAGE);
     }
 };
 
@@ -75,9 +75,9 @@ export const updateName = async (req, res) => {
         res.status(200).send(updatedUser);
     } catch (error) {
         if (error instanceof DatabaseError || UpdateUserNameError || CannotParseToNumberError) {
-            ErrorResponse.send(res, 400, _BAD_REQUEST_MESSAGE);
+            ResponseFactory.sendError(res, 400, _BAD_REQUEST_MESSAGE);
             return;
         }
-        ErrorResponse.send(res, 404, _ERROR_MESSAGE);
+        ResponseFactory.sendError(res, 404, _ERROR_MESSAGE);
     }
 };

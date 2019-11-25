@@ -1,5 +1,5 @@
 import * as NaverApiService from '../service/NaverApiService'
-import * as ErrorResponse from "../utils/ErrorResponse";
+import * as ResponseFactory from "../utils/ResponseFactory";
 import {calculate} from "../utils/OffsetCalculator";
 
 const _ERROR_MESSAGE = 'error occurred';
@@ -11,7 +11,6 @@ export const searchBooks = async (req, res) => {
         const books = await NaverApiService.searchBooks(title, number, offset);
         res.status(200).send(books);
     } catch (error) {
-        console.log(error);
-        ErrorResponse.send(res, 404, _ERROR_MESSAGE);
+        ResponseFactory.sendError(res, 404, _ERROR_MESSAGE);
     }
 };
