@@ -1,8 +1,8 @@
 import {sequelize} from "../../infra/database/sequelize";
-import {LibraryBook} from "../../infra/database/models/LibraryBook";
+import {LibraryBook} from "../../infra/database/models";
 import {calculate} from "../../common/utils/OffsetCalculator";
 import {LibraryBookVo} from "../LibraryBookVo";
-import {NotFoundLibraryBookError} from "../error/NotFoundLibraryBookError";
+import {NotFoundLibraryBookError} from "../error";
 import {Op} from "sequelize";
 
 const libraryBookRepository = sequelize.getRepository(LibraryBook);
