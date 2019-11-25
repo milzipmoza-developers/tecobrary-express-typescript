@@ -10,11 +10,12 @@ import {DataTypes} from "sequelize";
 export class Serial extends Model<Serial> {
 
     @PrimaryKey
+    @AutoIncrement
     @Column({
         primaryKey: true,
         allowNull: false
     })
-    public id: number;
+    id: number;
 
     @Column({
         type: DataTypes.BOOLEAN,
@@ -22,6 +23,12 @@ export class Serial extends Model<Serial> {
         defaultValue: false
     })
     status: boolean;
+
+    @Column({
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    })
+    bookId: number;
 
     @CreatedAt
     createdAt: Date;

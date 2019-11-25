@@ -56,4 +56,10 @@ export class WishBook extends Model<WishBook> {
         defaultValue: '내용 없음'
     })
     desc: string;
+
+    @Column({
+        type: DataTypes.INTEGER,
+        allowNull: false
+    })
+    wishUserId: number;
 }
