@@ -1,3 +1,5 @@
+import {libraryBookRouterFactory} from "./librarybook/router/libraryBookRouterFactory";
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -17,5 +19,6 @@ app.get('/', (req, res) => {
 });
 
 app.use(userRouterFactory());
+app.use(libraryBookRouterFactory());
 
 app.use(naverApiRouterFactory());
