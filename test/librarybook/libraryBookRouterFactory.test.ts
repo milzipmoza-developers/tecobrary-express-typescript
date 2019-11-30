@@ -59,7 +59,7 @@ describe('libraryBookRouterFactory 테스트', () => {
         expect(book.author).toBe('조영호');
         expect(book.publisher).toBe('위키북스');
         expect(book.isbn).toBe('8998139766 9788998139766');
-        expect(book.desc.length).not.toBe(0);
+        expect(book.description.length).not.toBe(0);
     });
 
     test('[GET] /books/:id 문자열 id 로 요청하면 Bad Request', async () => {
@@ -106,7 +106,7 @@ describe('libraryBookRouterFactory 테스트', () => {
                 author: '개발왕루피',
                 publisher: '우아한테크코스',
                 isbn: '19930705',
-                desc: '이 책이야 말로 구매해서 봐야 아는 책이다. 요약 설명은 생략한다.'
+                description: '이 책이야 말로 구매해서 봐야 아는 책이다. 요약 설명은 생략한다.'
             });
 
         expect(res.status).toBe(200);
@@ -124,7 +124,7 @@ describe('libraryBookRouterFactory 테스트', () => {
                 author: '개발왕루피',
                 publisher: '우아한테크코스',
                 isbn: '8998139766 9788998139766',
-                desc: '이 책이야 말로 구매해서 봐야 아는 책이다. 요약 설명은 생략한다.'
+                description: '이 책이야 말로 구매해서 봐야 아는 책이다. 요약 설명은 생략한다.'
             });
 
         expect(res.status).toBe(400);

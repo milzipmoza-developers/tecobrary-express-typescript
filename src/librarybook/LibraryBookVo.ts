@@ -4,15 +4,15 @@ export class LibraryBookVo {
     private readonly _author: string;
     private readonly _publisher: string;
     private readonly _isbn: string;
-    private readonly _desc: string;
+    private readonly _description: string;
 
-    constructor(image: string, title: string, author: string, publisher: string, isbn: string, desc: string) {
+    constructor(image: string, title: string, author: string, publisher: string, isbn: string, description: string) {
         this._image = image;
         this._title = title;
         this._author = author;
         this._publisher = publisher;
         this._isbn = isbn;
-        this._desc = desc;
+        this._description = description;
     }
 
 
@@ -36,7 +36,7 @@ export class LibraryBookVo {
         return this._isbn;
     }
 
-    get desc(): string {
-        return this._desc;
+    get description(): string {
+        return this._description;
     }
 }

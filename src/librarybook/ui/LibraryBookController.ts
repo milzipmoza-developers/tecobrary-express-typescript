@@ -2,7 +2,7 @@ import {parseToNumber} from "../../common/utils/InputUtils";
 import * as LibraryBookService from "../service/LibraryBookService";
 import {CannotParseToNumberError} from "../../common/utils/error";
 import * as Response from "../../common/utils/ResponseFactory";
-import {NotFoundLibraryBookError} from "../error/NotFoundLibraryBookError";
+import {NotFoundLibraryBookError} from "../error";
 import {LibraryBookVo} from "../LibraryBookVo";
 import {UniqueConstraintError} from "sequelize";
 
@@ -75,7 +75,7 @@ const createBook = async (req, res) => {
             requestBook.author,
             requestBook.publisher,
             requestBook.isbn,
-            requestBook.desc
+            requestBook.description
         );
         const savedBook = await LibraryBookService.createBook(libraryBook);
         res.status(200).send({

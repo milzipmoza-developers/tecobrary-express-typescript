@@ -22,7 +22,7 @@ export const createBook = async (book: LibraryBookVo) => {
         author: book.author,
         publisher: book.publisher,
         isbn: book.isbn,
-        desc: book.desc
+        description: book.description
     });
     return savedBook.get({plain: true});
 };

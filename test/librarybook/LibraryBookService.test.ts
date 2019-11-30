@@ -11,7 +11,7 @@ describe('LibraryBookService 테스트', () => {
         await expect(savedBook['author']).toBe('조영호');
         await expect(savedBook['publisher']).toBe('위키북스');
         await expect(savedBook['isbn']).toBe('8998139766 9788998139766');
-        await expect(savedBook['desc']).not.toBeNull();
+        await expect(savedBook['description']).not.toBeNull();
     });
 
     test('getTotalNumber 가 성공적으로 총 LibraryBook 수를 반환하다.', async () => {
@@ -45,7 +45,7 @@ describe('LibraryBookService 테스트', () => {
         await expect(createdBook['author']).toBe('개발왕루피');
         await expect(createdBook['publisher']).toBe('우아한테크코스');
         await expect(createdBook['isbn']).toBe('19930705');
-        await expect(createdBook['desc']).toBe('개발왕 루피의 첫 집필 도서, 궁금한 내용은 구매해서 보시라.');
+        await expect(createdBook['description']).toBe('개발왕 루피의 첫 집필 도서, 궁금한 내용은 구매해서 보시라.');
 
         await LibraryBookService.deleteBookById(createdBook['id']);
     });

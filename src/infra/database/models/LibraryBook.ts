@@ -52,5 +52,5 @@ export class LibraryBook extends Model<LibraryBook>{
         allowNull: true,
         defaultValue: '내용 없음'
     })
-    desc: string;
+    description: string;
 }
