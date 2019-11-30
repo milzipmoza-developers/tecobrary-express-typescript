@@ -58,11 +58,11 @@ describe('userRouterFactory 테스트', () => {
 
         const user = res.body;
         expect(user.id).toBe(1);
-        expect(user.githubId).toBe('1');
-        expect(user.email).toBe('a@a.com');
-        expect(user.name).toBe('a');
-        expect(user.avatarUrl).toBe('https://avatar.url');
-        expect(user.authorization).toBe('NONE');
+        expect(user.githubId).toBe('12345678');
+        expect(user.email).toBe('erasede@tecobrary.com');
+        expect(user.name).toBe('루피');
+        expect(user.avatarUrl).toBe('https://avatars3.githubusercontent.com/u/32266963?v=4');
+        expect(user.authorization).toBe('KING');
     });
 
     test('[GET] /users/:id, 존재하지 않는 유저일 때 Bad Request', async () => {
@@ -84,7 +84,7 @@ describe('userRouterFactory 테스트', () => {
     });
     
     test('[POST] /users, updateAuthorization 을 성공한다.', async () => {
-        const _TARGET_NEW_AUTHORIZATION = 'KING';
+        const _TARGET_NEW_AUTHORIZATION = 'USER';
 
         const res = await request(app)
             .post('/users')
@@ -94,7 +94,7 @@ describe('userRouterFactory 테스트', () => {
         expect(res.body.id).toBe(_TARGET_USER_ID);
         expect(res.body.authorization).toBe(_TARGET_NEW_AUTHORIZATION);
 
-        await rollbackUserAuthorization(_TARGET_USER_ID, 'NONE');
+        await rollbackUserAuthorization(_TARGET_USER_ID, 'KING');
     });
 
     test('[POST] /users, 유효하지 않은 auth 로 요청시 Bad Request', async () => {
@@ -138,7 +138,7 @@ describe('userRouterFactory 테스트', () => {
         expect(res.body.id).toBe(_TARGET_USER_ID);
         expect(res.body.name).toBe(_NEW_NAME);
 
-        await rollbackUserName(_TARGET_USER_ID, 'a');
+        await rollbackUserName(_TARGET_USER_ID, '루피');
     });
 
     test('[PATCH] /users, 존재하지 않는 유저로 요청시 Bad Request', async () => {

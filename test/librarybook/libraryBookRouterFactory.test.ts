@@ -43,7 +43,7 @@ describe('libraryBookRouterFactory 테스트', () => {
             .send();
 
         expect(res.statusCode).toBe(200);
-        expect(res.body.total).toBe(20)
+        expect(res.body.total).toBe(95)
     });
     
     test('[GET] /books/:id 요청에 성공한다.', async () => {
@@ -85,7 +85,7 @@ describe('libraryBookRouterFactory 테스트', () => {
             .send();
 
         expect(res.statusCode).toBe(200);
-        expect(res.body.length).toBe(2);
+        expect(res.body.length).toBe(9);
     });
 
     test('[GET] /books/search, page 와 number 가 누락되면 Bad Request', async () => {

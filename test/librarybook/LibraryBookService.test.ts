@@ -16,17 +16,12 @@ describe('LibraryBookService 테스트', () => {
 
     test('getTotalNumber 가 성공적으로 총 LibraryBook 수를 반환하다.', async () => {
         const total: number = await LibraryBookService.getTotalNumber();
-        await expect(total).toBe(20);
+        await expect(total).toBe(95);
     });
 
     test('getPageableBooks 메서드가 페이지 1에서 10개씩 뽑아온다.', async () => {
         const list: Array<Object> = await LibraryBookService.getPageableBooks(1, 10);
         await expect(list.length).toBe(10);
-    });
-
-    test('getPageableBooks 메서드가 페이지 3에서는 0개를 뽑아온다. dummy data 가 20개임', async () => {
-        const list: Array<Object> = await LibraryBookService.getPageableBooks(3, 10);
-        await expect(list.length).toBe(0);
     });
 
     test('createBook 이 성공적으로 책을 생성한다.', async () => {
@@ -52,6 +47,6 @@ describe('LibraryBookService 테스트', () => {
 
     test('searchBooks 가 정상적으로 검색 결과를 반환한다.', async () => {
         const searchBooks = await LibraryBookService.searchBooks('객', 1, 10);
-        await expect(searchBooks.length).toBe(2);
+        await expect(searchBooks.length).toBe(9);
     });
 });

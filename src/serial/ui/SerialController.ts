@@ -12,7 +12,8 @@ const bookSerials = async (req, res) => {
         res.status(200).send(serials);
     } catch (error) {
         if (error instanceof CannotParseToNumberError) {
-            ResponseFactory.sendError(res, 400,'bad request. parameter is invalid.')
+            ResponseFactory.sendError(res, 400, 'bad request. parameter is invalid.');
+            return;
         }
         ResponseFactory.sendError(res, 404, 'error occurred');
     }
