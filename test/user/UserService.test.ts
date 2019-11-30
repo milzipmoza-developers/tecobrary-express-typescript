@@ -1,23 +1,24 @@
 import {GithubUserVo} from "../../src/user/GithubUserVo";
-import * as UserService from"../../src/user/service/UserService";
+import * as UserService from "../../src/user/service/UserService";
 import {rollbackUserAuthorization, rollbackUserName} from "./UserRepositoryUtils";
 
 require('mysql2/node_modules/iconv-lite').encodingExists('foo');
 
-describe('UserService 테스트', () => {
 
+describe('UserService 테스트', () => {
     test('findById 가 성공적으로 유저를 반환한다.', async () => {
         const savedUser: Object = await UserService.findById(1);
         await expect(savedUser['id']).toBe(1);
-        await expect(savedUser['githubId']).toBe("1");
-        await expect(savedUser['email']).toBe('a@a.com');
-        await expect(savedUser['name']).toBe('a');
-        await expect(savedUser['avatarUrl']).toBe('https://avatar.url');
+        await expect(savedUser['githubId']).toBe('12345678');
+        await expect(savedUser['email']).toBe('erasede@tecobrary.com');
+        await expect(savedUser['name']).toBe('루피');
+        await expect(savedUser['avatarUrl']).toBe('https://avatars3.githubusercontent.com/u/32266963?v=4');
+        await expect(savedUser['authorization']).toBe('KING')
     });
 
     test('getTotalNumber 가 성공적으로 전체 갯수를 반환한다.', async () => {
         const total: number = await UserService.getTotalNumber();
-        await expect(total).toBe(12);
+        await expect(total).toBe(32);
     });
 
     test('getPageableUsers 메서드가 10개씩 뽑아온다.', async () => {
@@ -43,15 +44,16 @@ describe('UserService 테스트', () => {
         await expect(createdUser['email']).toBe('new@user.com');
         await expect(createdUser['name']).toBe('user');
         await expect(createdUser['avatarUrl']).toBe('https://avatar.url');
+        await expect(createdUser['authorization']).toBe('NONE');
 
         await UserService.deleteUserById(createdUser['id']);
     });
 
     test('updateAuthorization 이 정상적으로 권한을 업데이트 한다.', async () => {
-        const testTargetUserId = 1;
+        const testTargetUserId = 2;
         // check before update
         const beforeUpdated = await UserService.findById(testTargetUserId);
-        await expect(beforeUpdated['authorization']).toBe('NONE');
+        await expect(beforeUpdated['authorization']).toBe('USER');
         // update userAuthorization NONE to KING
         await UserService.updateUserAuthorization(testTargetUserId, 'KING');
         // check after update
@@ -62,10 +64,10 @@ describe('UserService 테스트', () => {
     });
 
     test('updateUserName 이 정상적으로 이름을 업데이트 한다.', async () => {
-        const testTargetUserId = 1;
+        const testTargetUserId = 2;
         // check before update
         const beforeUpdated = await UserService.findById(testTargetUserId);
-        await expect(beforeUpdated['name']).toBe('a');
+        await expect(beforeUpdated['name']).toBe('텤텤');
         // update user name a to newName
         await UserService.updateUserName(testTargetUserId, 'newName');
         // check after update
