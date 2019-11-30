@@ -7,6 +7,7 @@ const morgan = require('morgan');
 
 import {userRouterFactory} from './user/router/userRouterFactory';
 import {naverApiRouterFactory} from './common/router/naverApiRouterFactory';
+import {serialRouterFactory} from "./serial/router/serialRouterFactory";
 
 export const app = express();
 
@@ -20,5 +21,6 @@ app.get('/', (req, res) => {
 
 app.use(userRouterFactory());
 app.use(libraryBookRouterFactory());
+app.use(serialRouterFactory());
 
 app.use(naverApiRouterFactory());
