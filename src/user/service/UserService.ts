@@ -1,5 +1,5 @@
 import {sequelize} from "../../infra/database/sequelize";
-import {User} from "../../infra/database/models/User";
+import {User} from "../../infra/database/models";
 import {GithubUserVo} from "../GithubUserVo";
 import {NotFoundUserError, UpdateUserAuthorizationError, UpdateUserNameError} from "../error/";
 import {calculate} from "../../common/utils/OffsetCalculator";
