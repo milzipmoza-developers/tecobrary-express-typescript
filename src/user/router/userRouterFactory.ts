@@ -16,4 +16,5 @@ export const userRouterFactory = () => Router()
         UserController.updateAuthorization)
 
     .patch('/users',
-        UserController.updateName);
+        UserController.updateName)
+;
