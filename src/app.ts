@@ -3,6 +3,7 @@ import {userRouterFactory} from './user/router/userRouterFactory';
 import {naverApiRouterFactory} from './common/router/naverApiRouterFactory';
 import {serialRouterFactory} from "./serial/router/serialRouterFactory";
 import {wishBookRouterFactory} from "./wishbook/router/wishBookRouterFactory";
+import {rentHistoryRouterFactory} from "./renthistory/router/rentHistoryRouterFactory";
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -23,5 +24,6 @@ app.use(userRouterFactory());
 app.use(libraryBookRouterFactory());
 app.use(serialRouterFactory());
 app.use(wishBookRouterFactory());
+app.use(rentHistoryRouterFactory());
 
 app.use(naverApiRouterFactory());
