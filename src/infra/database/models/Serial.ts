@@ -18,6 +18,12 @@ export class Serial extends Model<Serial> {
     id: number;
 
     @Column({
+        type: DataTypes.INTEGER,
+        allowNull: false
+    })
+    serialNumber: number;
+
+    @Column({
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
