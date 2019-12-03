@@ -61,5 +61,5 @@ export class WishBook extends Model<WishBook> {
         type: DataTypes.INTEGER,
         allowNull: false
     })
-    wishUserId: number;
+    userId: number;
 }
