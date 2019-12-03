@@ -9,7 +9,7 @@ export const findSerialsByBookId = async (bookId: number) => {
     const savedSerials = await serialRepository.findAll(
         {
             where: {bookId},
-            attributes: ['id', 'status']
+            attributes: ['serialNumber', 'status']
         });
     const serials = [];
     savedSerials.forEach(serial => {
@@ -18,17 +18,17 @@ export const findSerialsByBookId = async (bookId: number) => {
     return serials;
 };
 
-export const createSerial = async (id: number, bookId: number) => {
+export const createSerial = async (serialNumber: number, bookId: number) => {
     const targetBook = await libraryBookRepository.findOne({where: {id: bookId}});
     if (targetBook === null) {
         throw new NotFoundSerialTargetError();
     }
-    const savedSerial = await serialRepository.create({id, bookId});
+    const savedSerial = await serialRepository.create({serialNumber, bookId});
     return savedSerial.get({plain: true});
 };
 
-export const deleteSerial = async (id: number) => {
-    const removedBook = await serialRepository.destroy({where: {id}});
+export const deleteSerial = async (serialNumber: number) => {
+    const removedBook = await serialRepository.destroy({where: {serialNumber}});
     if (removedBook === 0) {
         throw new NotFoundSerialError();
     }

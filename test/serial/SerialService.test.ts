@@ -22,7 +22,7 @@ describe('SerialSerivce 테스트', () => {
 
     test('createSerial 이 성공적으로 동작한다.', async () => {
         const savedSerial = await SerialService.createSerial(NEW_SERIAL, EXIST_BOOK_ID);
-        await expect(savedSerial['id']).toBe(NEW_SERIAL);
+        await expect(savedSerial['serialNumber']).toBe(NEW_SERIAL);
 
         // rollback
         await SerialService.deleteSerial(NEW_SERIAL);

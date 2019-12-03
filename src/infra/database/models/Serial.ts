@@ -19,7 +19,8 @@ export class Serial extends Model<Serial> {
 
     @Column({
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        unique: true
     })
     serialNumber: number;
 

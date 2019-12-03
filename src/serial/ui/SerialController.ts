@@ -21,9 +21,9 @@ const bookSerials = async (req, res) => {
 
 const enrollSerial = async (req, res) => {
     try {
-        const id = parseToNumber(req.body.id);
+        const serial = parseToNumber(req.body.serial);
         const bookId = parseToNumber(req.body.bookId);
-        const savedSerial = await SerialService.createSerial(id, bookId);
+        const savedSerial = await SerialService.createSerial(serial, bookId);
         res.status(200).send({
             message: '등록에 성공하였습니다.',
             serial: savedSerial
@@ -43,8 +43,8 @@ const enrollSerial = async (req, res) => {
 
 const deleteSerial = async (req, res) => {
     try {
-        const id = parseToNumber(req.query.id);
-        const result = await SerialService.deleteSerial(id);
+        const serial = parseToNumber(req.query.serial);
+        const result = await SerialService.deleteSerial(serial);
         res.status(200).send({
             message: 'success'
         })

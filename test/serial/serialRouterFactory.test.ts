@@ -28,7 +28,7 @@ describe('serialRouterFactory 테스트', () => {
         const newSerial = 300;
         const res = await request(app)
             .post('/serials')
-            .send({'id': newSerial, 'bookId': 9});
+            .send({'serial': newSerial, 'bookId': 9});
 
         expect(res.statusCode).toBe(200);
         expect(res.body.message).toBe('등록에 성공하였습니다.');
@@ -42,7 +42,7 @@ describe('serialRouterFactory 테스트', () => {
         const newSerial = 1;
         const res = await request(app)
             .post('/serials')
-            .send({'id': newSerial, 'bookId': 9});
+            .send({'serial': newSerial, 'bookId': 9});
 
         expect(res.statusCode).toBe(400);
         expect(res.body.message).toBe('해당하는 일련번호가 이미 존재합니다.');
@@ -52,7 +52,7 @@ describe('serialRouterFactory 테스트', () => {
         const newSerial = 300;
         const res = await request(app)
             .post('/serials')
-            .send({'id': newSerial, 'bookId': 1000});
+            .send({'serial': newSerial, 'bookId': 1000});
 
         expect(res.statusCode).toBe(400);
         expect(res.body.message).toBe('해당하는 책이 존재하지 않습니다.');
