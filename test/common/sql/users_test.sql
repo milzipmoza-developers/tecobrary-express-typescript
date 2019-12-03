@@ -11,7 +11,7 @@ CREATE TABLE Users (
   `email` varchar(100) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   avatarUrl varchar(255) NOT NULL,
-  `authorization` enum('none','user','manager','god') NOT NULL DEFAULT 'none',
+  `authorization` enum('NONE','USER','MANAGER','KING') NOT NULL DEFAULT 'NONE',
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),

@@ -12,7 +12,7 @@ CREATE TABLE WishBooks (
   `author` varchar(255) NOT NULL,
   `publisher` varchar(255) DEFAULT NULL,
   `isbn` varchar(255) NOT NULL,
-  `desc` varchar(255) DEFAULT '내용 없음',
+  `description` varchar(255) DEFAULT '내용 없음',
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   `deletedAt` datetime DEFAULT NULL,
