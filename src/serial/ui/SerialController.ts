@@ -43,7 +43,7 @@ const enrollSerial = async (req, res) => {
 
 const deleteSerial = async (req, res) => {
     try {
-        const id = parseToNumber(req.body.id);
+        const id = parseToNumber(req.query.id);
         const result = await SerialService.deleteSerial(id);
         res.status(200).send({
             message: 'success'
