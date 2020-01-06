@@ -55,5 +55,11 @@ export class WishBook extends Model<WishBook> {
         allowNull: true,
         defaultValue: '내용 없음'
     })
-    desc: string;
+    description: string;
+
+    @Column({
+        type: DataTypes.INTEGER,
+        allowNull: false
+    })
+    userId: number;
 }

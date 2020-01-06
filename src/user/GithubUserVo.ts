@@ -1,4 +1,4 @@
-export class GithubUser {
+export class GithubUserVo {
     private readonly _githubId: number;
     private readonly _email: string;
     private readonly _name: string;

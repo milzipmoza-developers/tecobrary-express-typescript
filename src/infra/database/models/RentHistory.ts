@@ -1,4 +1,4 @@
-import {Column, Model, PrimaryKey, Table} from "sequelize-typescript";
+import {AutoIncrement, Column, Model, PrimaryKey, Table} from "sequelize-typescript";
 import {DataTypes} from "sequelize";
 
 @Table({
@@ -11,6 +11,13 @@ import {DataTypes} from "sequelize";
 export class RentHistory extends Model<RentHistory> {
 
     @PrimaryKey
+    @AutoIncrement
+    @Column({
+        primaryKey: true,
+        allowNull: false
+    })
+    id: number;
+
     @Column({
         type: DataTypes.INTEGER,
         allowNull: false,

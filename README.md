@@ -35,3 +35,7 @@
 ## Convention
 
 컨벤션은 프로젝트를 진행하면서 지속적으로 업데이트하는 것을 목표로 합니다.
+
+## TODO
+
+- [ ] 각 routerFactory 에 authorization 관련 middleware 를 추가한다.
